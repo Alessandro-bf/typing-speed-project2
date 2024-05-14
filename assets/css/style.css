@@ -24,3 +24,13 @@ body {
     background-color: mediumblue;
     color:aliceblue;
 }
+
+.correct {
+    background-color: lightgreen;
+    color: darkgreen;
+}
+
+.incorrect {
+    background-color: lightcoral;
+    color: darkred;
+}

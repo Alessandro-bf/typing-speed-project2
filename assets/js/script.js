@@ -10,32 +10,33 @@ let texts = [
 
 let textToTypeElement = document.getElementById('text-to-type');
 let inputArea = document.getElementById('input-area');
-let restartButton = document.getElementById('restart-button');
 let timerElement = document.getElementById('timer');
 let wpmElement = document.getElementById('wpm');
 let accuracyElement = document.getElementById('accuracy');
+let restartButton = document.getElementById('restart-button');
 
 let startTime, timerInterval;
 
 inputArea.addEventListener('input', updateStatistics);
 restartButton.addEventListener('click',restartTest);
-document.addEventListener('keydown',(e) => {
+document.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
         restartTest();
     }
-})
+});
 
 function updateStatistics() {
     let elapsedTime = (Date.now() - startTime) / 1000;
     let typedText = inputArea.value;
-    let wordsTyped = typedText.trim().split(/\s+/).length;
-    let correctChars = countCorrectCharacters (typedText,textToTypeElement.innerText);
+    let wordsTyped = typedText.split(/\s+/).filter(word => word.length > 0).length;
+    let correctChars = countCorrectCharacters(typedText, textToTypeElement.innerText);
     let accuracy = (correctChars / textToTypeElement.innerText.length) * 100;
 
     timerElement.innerText = `Time: ${Math.floor(elapsedTime)}s`;
-    wpmElement.innerText = `Words per Minute: ${Math.floor((wordsTyped / elapsedTime) * 60)}`;
+    wpmElement.innerText = `WPM: ${Math.floor((wordsTyped / elapsedTime) * 60)}`;
     accuracyElement.innerText = `Accuracy: ${Math.floor(accuracy)}%`;
 
+    highlightText(typedText);
     checkTextCompleted(typedText);
 }
 
@@ -49,7 +50,19 @@ function countCorrectCharacters(typed, original) {
     return correct;
 }
 
-function checkTextCompleted() {
+function highlightText(typed) {
+    let highlightedText = '';
+    for (let i = 0; i < typed.length; i++) {
+        if (typed[i] === textToTypeElement.innerText[i]) {
+            highlightedText += `<span class="correct">${typed[i]}</span>`;
+        } else {
+            highlightedText += `<span class="incorrect">${typed[i]}</span>`;
+        }
+    }
+    textToTypeElement.innerHTML = highlightedText + textToTypeElement.innerText.substring(typed.length);
+}
+
+function checkTextCompleted(typed) {
     if (typed === textToTypeElement.innerText) {
         clearInterval(timerInterval);
         alert("Well done! You've completed the typing test.");
@@ -63,11 +76,16 @@ function getRandomText() {
 
 function startTest() {
     startTime = Date.now();
-    timerInterval = setInterval(updateStatistics,1000);
+    timerInterval = setInterval(updateStatistics, 1000);
 }
 
 function restartTest() {
     clearInterval(timerInterval);
+    inputArea.value = '';
+    timerElement.innerText = 'Timer: 0s';
+    wpmElement.innerText = 'Words per Minute: 0';
+    accuracyElement.innerText = 'Accuracy: 0%';
+    textToTypeElement.innerText = getRandomText();
     startTime = Date.now();
     startTest();
     inputArea.focus();
