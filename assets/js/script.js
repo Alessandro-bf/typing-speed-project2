@@ -8,16 +8,34 @@ let texts = [
     "Do not count your chickens before they are hatched."
 ]
 
+let textToTypeElement = document.getElementById('text-to-type');
+let inputArea = document.getElementById('input-area')
+
+
 function getRandomText () {
     let randomIndex = Math.floor(Math.random()*texts.length);
     return texts[randomIndex];    
 }
 
-function startTest () {
-
+function countCorrectCharacters (typed, original) { 
+    let correct = 0;
+    for (let i = 0; i < typed.length; i++) {
+        if (typed[i] === original[i]) {
+            correct++;
+        }
+    }
+    return correct;
 }
 
-function checkText () {
+function checkTextFinish () {
+    let timerInterval;
+    if (typed === textToTypeElement.innerText) {
+        clearInterval(timerInterval);
+        alert("Well done! You've complited the typing test.");
+    }
+}
+
+function startTest () {
 
 }
 
