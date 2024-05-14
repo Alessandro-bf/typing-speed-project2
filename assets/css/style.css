@@ -1,0 +1,17 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    background-color: lightslategray;
+    height: 100vh;
+}
+
+.container {
+    text-align: center;
+    background-color: lightgrey;
+    padding: 25px;
+}
+
+
+
