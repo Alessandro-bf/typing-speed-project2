@@ -4,6 +4,9 @@
 
 The Typing Speed Test is a web-based application designed to help users assess and improve their typing speed and accuracy. This simple tool is useful for individuals looking to enhance their keyboarding skills, which is especially beneficial for professionals such as developers, writers, and anyone else who relies heavily on typing.
 
+
+<h2 align="center"><img src="assets/images/screen_views.png"></h2>
+
 ## Features
 
 1. Dynamic Text:
@@ -24,14 +27,20 @@ The Typing Speed Test is a web-based application designed to help users assess a
 -   The test starts automatically when the page is loaded.
 -   Begin typing the displayed sentence in the text area.
 
+<h2 align="center"><img src="assets/images/start_test.png"></h2>
+
 ### During the Test
 
 -   As you type, the application tracks and displays your typing speed, accuracy, and the time elapsed since the start of the test.
 -   Your input is highlighted in real-time to show correct (green) and incorrect (red) entries.
 
+<h2 align="center"><img src="assets/images/during_test.png"></h2>
+
 ### Restarting the Test
 
 -   Click the "Restart" button or press the "Enter" key to start over with a new sentence.
+
+<h2 align="center"><img src="assets/images/restart_test.png"></h2>
 
 
 ## Technologies Used
@@ -63,13 +72,20 @@ The W3C Markup Validator and W3C CSS Validator Services were used to validate ev
 -   HTML: No errors were returned when passing through the official - [W3C Markup Validator](https://validator.w3.org/#validate_by_input)
 -   CSS: No errors were returned when passing through the official - [W3C CSS Validator](https://jigsaw.w3.org/css-validator/#validate_by_input)
 -   JavaScript: No errors were returned when passing through the official - [JavaScript Validator](https://jshint.com/)
-
+    -   The following metrics were returned:
+    -   There are 9 functions in this file.
+    -   Function with the largest signature take 2 arguments, while the median is 1.
+    -   Largest function has 10 statements in it, while the median is 3.
+    -   The most complex function has a cyclomatic complexity value of 3 while the median is 1.
 
 ### Further Testing
 
 -   The Website was tested on Google Chrome, Internet Explorer, Microsoft Edge and Safari browsers.
 -   The website was viewed on a variety of devices such as Desktop, Laptop, iPhone7, iPhone 8 & iPhoneX.
 -   Friends and family members were asked to review the site and documentation to point out any bugs and/or user experience issues.
+-   A Lighthouse test was performed using the DevTool with the following results:
+
+<h2 align="center"><img src="assets/images/lighthouse_test.png"></h2>
 
 ### Known Bugs
 
@@ -77,6 +93,7 @@ The W3C Markup Validator and W3C CSS Validator Services were used to validate ev
     -   It is a bug from the validator - [Answer to the JavaScript validator mistake](https://stackoverflow.com/questions/27441803/why-does-jshint-throw-a-warning-if-i-am-using-const)
 -   The statistics function didn't work, and the data was showing 0 all the time.
     -   A typing mistake on an instruction was found.
+    -   The functions were not in the correct order.
 
 ## Deployment
 
@@ -144,3 +161,5 @@ $ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY
 -   My Mentor for continuous helpful feedback.
 
 -   Tutor support at Code Institute for their support.
+
+-   Internet Tutorials: [codewithcurious](https://codewithcurious.com/projects/typing-speed-test-game-in-html-css-js/) and [endyourif](https://www.endyourif.com/building-a-typing-speed-test-program-with-javascript/).

@@ -1,3 +1,4 @@
+//Array of sentences for the typing test.
 let texts = [
     "A journey of a thousand miles begins with a single step.",
     "Curiosity killed the cat, but satisfaction brought it back.",
@@ -8,15 +9,18 @@ let texts = [
     "Do not count your chickens before they are hatched."
 ];
 
-let textToTypeElement = document.getElementById('text-to-type');
-let inputArea = document.getElementById('input-area');
-let timerElement = document.getElementById('timer');
-let wpmElement = document.getElementById('wpm');
-let accuracyElement = document.getElementById('accuracy');
-let restartButton = document.getElementById('restart-button');
+// DOM element references
+const textToTypeElement = document.getElementById('text-to-type');
+const inputArea = document.getElementById('input-area');
+const timerElement = document.getElementById('timer');
+const wpmElement = document.getElementById('wpm');
+const accuracyElement = document.getElementById('accuracy');
+const restartButton = document.getElementById('restart-button');
 
+//Variables for tracking test start time and interval.
 let startTime, timerInterval;
 
+//Adds event listeners for typing input, restart button, and Enter keypress.
 inputArea.addEventListener('input', updateStatistics);
 restartButton.addEventListener('click',restartTest);
 document.addEventListener('keydown', (e) => {
@@ -25,6 +29,9 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
+/**
+ * Updates typing statistics such as time elapsed, words per minute, and accuracy.
+ */
 function updateStatistics() {
     let elapsedTime = (Date.now() - startTime) / 1000;
     let typedText = inputArea.value;
@@ -40,6 +47,9 @@ function updateStatistics() {
     checkTextCompleted(typedText);
 }
 
+/**
+ * Counts the number of correctly typed characters in the input area compared to the displayed text.
+ */
 function countCorrectCharacters(typed, original) {
     let correct = 0;
     for (let i = 0; i < typed.length; i++) {
@@ -50,6 +60,9 @@ function countCorrectCharacters(typed, original) {
     return correct;
 }
 
+/**
+ * Highlights correctly and incorrectly typed characters in the displayed text.
+ */
 function highlightText(typed) {
     let highlightedText = '';
     for (let i = 0; i < typed.length; i++) {
@@ -62,6 +75,9 @@ function highlightText(typed) {
     textToTypeElement.innerHTML = highlightedText + textToTypeElement.innerText.substring(typed.length);
 }
 
+/**
+ * Checks if the entire text has been correctly typed and stops the timer if completed.
+ */
 function checkTextCompleted(typed) {
     if (typed === textToTypeElement.innerText) {
         clearInterval(timerInterval);
@@ -69,16 +85,25 @@ function checkTextCompleted(typed) {
     }
 }
 
+/**
+ * Selects a random text from the 'texts' array to be typed.
+ */
 function getRandomText() {
     let randomIndex = Math.floor(Math.random() * texts.length);
     return texts[randomIndex];
 }
 
+/**
+ * Initializes the timer and statistics for the typing test.
+ */
 function startTest() {
     startTime = Date.now();
     timerInterval = setInterval(updateStatistics, 1000);
 }
 
+/**
+ * Resets the test, clearing statistics and setting a new random text.
+ */
 function restartTest() {
     clearInterval(timerInterval);
     inputArea.value = '';
@@ -91,4 +116,5 @@ function restartTest() {
     inputArea.focus();
 }
 
+// Automatically restarts the test when the script is first loaded
 restartTest();
