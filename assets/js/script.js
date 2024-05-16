@@ -33,7 +33,7 @@ function updateStatistics() {
     let accuracy = (correctChars / textToTypeElement.innerText.length) * 100;
 
     timerElement.innerText = `Time: ${Math.floor(elapsedTime)}s`;
-    wpmElement.innerText = `WPM: ${Math.floor((wordsTyped / elapsedTime) * 60)}`;
+    wpmElement.innerText = `Words per Minute: ${Math.floor((wordsTyped / elapsedTime) * 60)}`;
     accuracyElement.innerText = `Accuracy: ${Math.floor(accuracy)}%`;
 
     highlightText(typedText);

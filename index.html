@@ -9,6 +9,11 @@
 <body>
     <div class="container">
         <h1>Typing Speed Test</h1>
+        <p class="instructions">
+            <strong>Instructions: </strong>To begin the Typing Speed Test, open the application in a web browser. 
+            The test starts automatically. Just type the sentence shown in the text area. As you type, the test will show your speed, accuracy, and time. 
+            It also marks right answers in green and wrong ones in red. To try a new sentence, either click "Restart" or press "Enter."
+        </p>
         <div>
             <p id="text-to-type">The only thing we have to fear is fear itself.</p>
             <textarea id="input-area" placeholder="Start typing here..."></textarea>
@@ -19,6 +24,9 @@
             <p id = "accuracy">Accuracy: 0%</p>
         </div>
         <button id = "restart-button">Restart</button>
+        <p class="motivation">
+            The average person types at about 40 words per minute (WPM). Can you beat that? Aim for 50 WPM or more to consider yourself above average. Keep practicing to improve your speed and accuracy!
+        </p>
     </div>
 
     <script src="assets/js/script.js"></script>
