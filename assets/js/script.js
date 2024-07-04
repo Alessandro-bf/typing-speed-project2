@@ -52,7 +52,8 @@ function updateStatistics() {
  */
 function countCorrectCharacters(typed, original) {
     let correct = 0;
-    for (let i = 0; i < typed.length; i++) {
+    let minLength = Math.min(typed.length, original.length);
+    for (let i = 0; i < minLength; i++) {
         if (typed[i] === original[i]) {
             correct++;
         }
@@ -65,14 +66,24 @@ function countCorrectCharacters(typed, original) {
  */
 function highlightText(typed) {
     let highlightedText = '';
-    for (let i = 0; i < typed.length; i++) {
+    let minLength = Math.min(typed.length, textToTypeElement.innerText.length);
+    
+    for (let i = 0; i < minLength; i++) {
         if (typed[i] === textToTypeElement.innerText[i]) {
             highlightedText += `<span class="correct">${typed[i]}</span>`;
         } else {
             highlightedText += `<span class="incorrect">${typed[i]}</span>`;
         }
     }
-    textToTypeElement.innerHTML = highlightedText + textToTypeElement.innerText.substring(typed.length);
+
+    // Handle extra characters typed by the user
+    if (typed.length > textToTypeElement.innerText.length) {
+        for (let i = textToTypeElement.innerText.length; i < typed.length; i++) {
+            highlightedText += `<span class="extra">${typed[i]}</span>`;
+        }
+    }
+
+    textToTypeElement.innerHTML = highlightedText + textToTypeElement.innerText.substring(minLength);
 }
 
 /**
