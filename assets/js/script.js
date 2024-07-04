@@ -30,14 +30,22 @@ document.addEventListener('keydown', (e) => {
 });
 
 /**
+ * Normalizes text by trimming and collapsing multiple spaces.
+ */
+function normalizeText(text) {
+    return text.trim().replace(/\s+/g, ' ');
+}
+
+/**
  * Updates typing statistics such as time elapsed, words per minute, and accuracy.
  */
 function updateStatistics() {
     let elapsedTime = (Date.now() - startTime) / 1000;
-    let typedText = inputArea.value;
+    let typedText = normalizeText(inputArea.value);
+    let originalText = normalizeText(textToTypeElement.innerText);
     let wordsTyped = typedText.split(/\s+/).filter(word => word.length > 0).length;
-    let correctChars = countCorrectCharacters(typedText, textToTypeElement.innerText);
-    let accuracy = (correctChars / textToTypeElement.innerText.length) * 100;
+    let correctChars = countCorrectCharacters(typedText, originalText);
+    let accuracy = (correctChars / originalText.length) * 100;
 
     timerElement.innerText = `Time: ${Math.floor(elapsedTime)}s`;
     wpmElement.innerText = `Words per Minute: ${Math.floor((wordsTyped / elapsedTime) * 60)}`;
@@ -90,7 +98,7 @@ function highlightText(typed) {
  * Checks if the entire text has been correctly typed and stops the timer if completed.
  */
 function checkTextCompleted(typed) {
-    if (typed === textToTypeElement.innerText) {
+    if (normalizeText(typed) === normalizeText(textToTypeElement.innerText)) {
         clearInterval(timerInterval);
         alert("Well done! You've completed the typing test.");
     }
