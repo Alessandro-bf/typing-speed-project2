@@ -105,10 +105,13 @@ function highlightText(typed) {
 }
 
 /**
- * Checks if the entire text has been correctly typed and stops the timer if completed.
+ * Checks if the length of the original text is the same as the length of the text in the input area and stops the timer if true.
  */
 function checkTextCompleted(typed) {
-    if (normalizeText(typed) === normalizeText(textToTypeElement.innerText)) {
+    let normalizedTyped = normalizeText(typed);
+    let normalizedOriginal = normalizeText(textToTypeElement.innerText);
+    
+    if (normalizedTyped.length === normalizedOriginal.length) {
         clearInterval(timerInterval);
         alert("Well done! You've completed the typing test.");
     }
