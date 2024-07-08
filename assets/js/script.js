@@ -74,24 +74,34 @@ function countCorrectCharacters(typed, original) {
  */
 function highlightText(typed) {
     let highlightedText = '';
-    let minLength = Math.min(typed.length, textToTypeElement.innerText.length);
+    let originalText = textToTypeElement.innerText;
+
+    let minLength = Math.min(typed.length, originalText.length);
     
     for (let i = 0; i < minLength; i++) {
-        if (typed[i] === textToTypeElement.innerText[i]) {
-            highlightedText += `<span class="correct">${typed[i]}</span>`;
+        if (typed[i] === originalText[i]) {
+            highlightedText += `<span class="correct">${originalText[i]}</span>`;
         } else {
-            highlightedText += `<span class="incorrect">${typed[i]}</span>`;
+            highlightedText += `<span class="incorrect">${originalText[i]}</span>`;
         }
     }
 
+    if (typed.length < originalText.length) {
+        highlightedText += originalText.substring(typed.length);
+    }
+
     // Handle extra characters typed by the user
-    if (typed.length > textToTypeElement.innerText.length) {
-        for (let i = textToTypeElement.innerText.length; i < typed.length; i++) {
+    if (typed.length > originalText.length) {
+        for (let i = originalText.length; i < typed.length; i++) {
             highlightedText += `<span class="extra">${typed[i]}</span>`;
         }
     }
 
-    textToTypeElement.innerHTML = highlightedText + textToTypeElement.innerText.substring(minLength);
+    let highlightContainer = document.createElement('span');
+    highlightContainer.innerHTML = highlightedText;
+
+    textToTypeElement.innerHTML = '';
+    textToTypeElement.appendChild(highlightContainer);
 }
 
 /**
