@@ -93,3 +93,56 @@ h1 {
     background-color: lightgoldenrodyellow;
     color: yellow;
 }
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+
+    .instructions, .motivation {
+        font-size: 0.9em;
+    }
+
+    #text-to-type {
+        font-size: 1.2em;
+    }
+
+    #input-area {
+        height: 80px;
+        font-size: 0.9em;
+    }
+
+    #restart-button {
+        font-size: 0.9em;
+        padding: 8px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.2em;
+    }
+
+    .instructions, .motivation {
+        font-size: 0.8em;
+    }
+
+    #text-to-type {
+        font-size: 1em;
+    }
+
+    #input-area {
+        height: 60px;
+        font-size: 0.8em;
+    }
+
+    #restart-button {
+        font-size: 0.8em;
+        padding: 6px 12px;
+    }
+}
